@@ -54,7 +54,7 @@ function endGame() {
 }
 
 function checkCollision() {
-  if (bird.yPos >= height) {
+  if (bird.yPos >= height || bird.yPos <= -35) {
     endGame();
   }
 }
