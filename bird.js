@@ -1,9 +1,9 @@
 class Bird {
-	constructor(x, y, s, r) {
+	constructor(x, y, s, d) {
 		this.x = x; // x position
 		this.y = y; // y position
 		this.s = s; // speed
-		this.r = r; // radius
+		this.d = d; // diameter
 	}
 
 	get xPos() {
@@ -28,6 +28,6 @@ class Bird {
 	}
 
 	draw() {
-		ellipse(this.x, this.y, this.r, this.r);
+		ellipse(this.x, this.y, this.d, this.d);
 	}
 }

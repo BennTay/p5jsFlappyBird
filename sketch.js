@@ -12,7 +12,7 @@ var bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
 
 // Pipe properties
 let pipeWidth = 30,
-    pipeSpeed = 10,
+    pipeSpeed = 5,
     gapHeight = 50;
 var pipeList = [];
     /*
@@ -28,6 +28,7 @@ var gravity = 0.6;
 
 function resetGame() {
   bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
+  pipeList = [];
   game_started = false;
   loop();
 }
@@ -39,7 +40,6 @@ function setup() {
 
 function draw() {
   background(200);
-  let p = new Pipe(pipeWidth, canvas_height, canvas_width, pipeSpeed, gapHeight);
   if (game_started) {
     updateGameObjects();
   } else {
@@ -49,22 +49,35 @@ function draw() {
 
 function endGame() {
   alert('Game over!');
-  bird.yPos = height - 0.5 * birdDiameter;
+  //bird.yPos = height - 0.5 * birdDiameter;
   noLoop();
+}
+
+function checkCollision() {
+  if (bird.yPos >= height) {
+    endGame();
+  }
 }
 
 function updateGameObjects() {
   // Update Bird
   bird.fallSpeed += gravity;
   bird.yPos += bird.fallSpeed;
-  if (bird.yPos >= height) {
-    endGame();
-  }
-
   bird.draw();
 
   // Update pipes
-  
+  if (frameCount % 80 === 0) {
+    pipeList.push(new Pipe(pipeWidth, canvas_height, canvas_width, pipeSpeed, gapHeight));
+  }
+  pipeList.forEach(p => {
+    p.xPos -= p.speed;
+    if (p.xPos < 0) {
+      pipeList.shift();
+    }
+    p.draw();
+  })
+
+  checkCollision();
 }
 
 function generateScreenSaver() {
