@@ -65,7 +65,7 @@ function updateGameObjects() {
   }
   pipeList.forEach(p => {
     p.xPos -= p.speed;
-    if (p.xPos < 0) {
+    if (p.xPos < 0 - pipeWidth) {
       pipeList.shift();
     }
     p.draw();
