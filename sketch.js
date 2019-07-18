@@ -2,7 +2,8 @@
 const birdX = 100,
     birdY = 250,
     fallSpeed = 0,
-    birdDiameter = 30, 
+    birdDiameter = 30,
+    birdRadius = 0.5 * birdDiameter,
     maxSpeed = -10;
 var bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
 
@@ -25,6 +26,7 @@ function resetGame() {
   bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
   pipeList = [];
   game_started = false;
+  score = 0;
   loop();
 }
 
@@ -47,7 +49,7 @@ function draw() {
   stroke(0);
   text("FPS: " + fps.toFixed(2), 10, height - 10);
   */
-  
+
   if (game_started) {
     updateGameObjects();
     text('Score: ' + str(score), 700, 50);
@@ -64,15 +66,15 @@ function endGame() {
 
 function checkCollision() {
   // Check if bird has fallen to the ground or flown too high out of canvas
-  if (bird.yPos >= height || bird.yPos <= -35) {
+  if (bird.yPos + birdRadius >= height || bird.yPos <= -35) {
     endGame();
   }
 
   // Check if the bird has collided with the nearest pipe
   if (pipeList.length > 0) {
     let p = pipeList[0];
-    if (Math.abs(p.xPos + (pipeWidth/2) - bird.xPos) < 0.5 * (pipeWidth + (0.5*birdDiameter))) {
-      if (bird.yPos < p.topComponentHeight || bird.yPos > canvas_height - p.bottomComponentHeight) {
+    if (Math.abs(p.xPos + (pipeWidth/2) - bird.xPos) < 0.5 * (pipeWidth + (birdRadius))) {
+      if (bird.yPos - birdRadius <= p.topComponentHeight || bird.yPos + birdRadius > p.bottomComponentYPos) {
         endGame();
       }
     }

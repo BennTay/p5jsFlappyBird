@@ -17,8 +17,8 @@ class Pipe {
 		return this.topHeight;
 	}
 
-	get bottomComponentHeight() {
-		return this.bottomHeight;
+	get bottomComponentYPos() {
+		return this.bottomYPos;
 	}
 
 	get xPos() {
