@@ -4,6 +4,7 @@ class Bird {
 		this.y = y; // y position
 		this.s = s; // speed
 		this.d = d; // diameter
+		this.img; // image
 	}
 
 	get xPos() {
@@ -27,7 +28,12 @@ class Bird {
 		this.s = s;
 	}
 
+	set imgSprite(img) {
+		this.img = img;
+	}
+
 	draw() {
-		ellipse(this.x, this.y, this.d, this.d);
+		//ellipse(this.x, this.y, this.d, this.d);
+		image(this.img, this.x, this.y, this.diameter, this.diameter);
 	}
 }
