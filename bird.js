@@ -34,7 +34,7 @@ class Bird {
 
 	draw() {
 		//ellipse(this.x, this.y, this.d, this.d);
-		image(this.img, this.x, this.y, this.diameter, this.diameter);
+		//image(this.img, this.x, this.y, this.diameter, this.diameter);
 		rect(this.x, this.y, 60, 60);
 	}
 }
