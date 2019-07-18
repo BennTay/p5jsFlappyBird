@@ -16,6 +16,8 @@ var pipeList = [];
 const gravity = 0.6,
   canvas_width = 900,
   canvas_height = 500;
+
+// Other game properties
 var score = 0,
   game_started = false;
 
@@ -27,15 +29,28 @@ function resetGame() {
 }
 
 function setup() {
+  // Setup canvas
   var canvas = createCanvas(canvas_width, canvas_height);
   canvas.parent('flappybirdholder');
+
+  // Setup text
+  textSize(24);
 }
 
 function draw() {
   background(200); // Must come first. Draw the background before drawing the objects on it, otherwise objects will not appear.
 
+  // Draw FPS (rounded to 2 decimal places) at the bottom left of the screen
+  /*
+  let fps = frameRate();
+  fill(255);
+  stroke(0);
+  text("FPS: " + fps.toFixed(2), 10, height - 10);
+  */
+  
   if (game_started) {
     updateGameObjects();
+    text('Score: ' + str(score), 700, 50);
   } else {
     generateScreenSaver();
   }
@@ -53,14 +68,15 @@ function checkCollision() {
     endGame();
   }
 
-  // Check if the bird has collided with any pipes
-  pipeList.forEach(p => {
+  // Check if the bird has collided with the nearest pipe
+  if (pipeList.length > 0) {
+    let p = pipeList[0];
     if (Math.abs(p.xPos + (pipeWidth/2) - bird.xPos) < 0.5 * (pipeWidth + (0.5*birdDiameter))) {
       if (bird.yPos < p.topComponentHeight || bird.yPos > canvas_height - p.bottomComponentHeight) {
         endGame();
       }
     }
-  })
+  }
 }
 
 function updateGameObjects() {
@@ -79,9 +95,15 @@ function updateGameObjects() {
       pipeList.shift();
     }
     p.draw();
-  })
+  })  
 
-  //TODO: Keep score
+  // Update score
+  if (pipeList.length > 0) {
+    let firstPipe = pipeList[0];
+    if (firstPipe.xPos === bird.xPos) {
+      score++;
+    }
+  }
 
   checkCollision();
 }
