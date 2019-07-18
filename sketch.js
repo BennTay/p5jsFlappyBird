@@ -39,17 +39,17 @@ function setup() {
   textSize(24);
 }
 
-function draw() {
-  background(200); // Must come first. Draw the background before drawing the objects on it, otherwise objects will not appear.
-
-  // Draw FPS (rounded to 2 decimal places) at the bottom left of the screen
-  /*
+// Draw FPS (rounded to 2 decimal places) at the bottom left of the screen
+// Source: https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance
+function displayFPS() {
   let fps = frameRate();
   fill(255);
   stroke(0);
   text("FPS: " + fps.toFixed(2), 10, height - 10);
-  */
+}
 
+function draw() {
+  background(200); // Must come first. Draw the background before drawing the objects on it, otherwise objects will not appear.
   if (game_started) {
     updateGameObjects();
     text('Score: ' + str(score), 700, 50);
@@ -60,23 +60,41 @@ function draw() {
 
 function endGame() {
   alert('Game over!');
-  //bird.yPos = height - 0.5 * birdDiameter; // For making the circle align correctly on the ground after game over
   noLoop();
 }
 
 function checkCollision() {
   // Check if bird has fallen to the ground or flown too high out of canvas
+  /*
   if (bird.yPos + birdRadius >= height || bird.yPos <= -35) {
+    endGame();
+  }
+  */
+
+  // Check collision between bird and ground/sky using p5.collide2D
+  if (collideLineCircle(0, canvas_height, canvas_width, canvas_height, bird.xPos, bird.yPos, birdDiameter)
+    || collideLineCircle(0, -35, canvas_width, -35, bird.xPos, bird.yPos, birdDiameter)) {
     endGame();
   }
 
   // Check if the bird has collided with the nearest pipe
+  /*
   if (pipeList.length > 0) {
     let p = pipeList[0];
     if (Math.abs(p.xPos + (pipeWidth/2) - bird.xPos) < 0.5 * (pipeWidth + (birdRadius))) {
       if (bird.yPos - birdRadius <= p.topComponentHeight || bird.yPos + birdRadius > p.bottomComponentYPos) {
         endGame();
       }
+    }
+  }
+  */
+
+  // Check collision between bird and nearest pipe using p5.collide2D
+  if (pipeList.length > 0) {
+    let p = pipeList[0];
+    if (collideRectCircle(p.xPos, 0, pipeWidth, p.topComponentHeight, bird.xPos, bird.yPos, birdDiameter)
+      || collideRectCircle(p.xPos, p.bottomComponentYPos, pipeWidth, p.bottomComponentHeight, bird.xPos, bird.yPos, birdDiameter)) {
+      endGame();
     }
   }
 }

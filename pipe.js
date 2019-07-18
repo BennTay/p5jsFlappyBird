@@ -13,6 +13,10 @@ class Pipe {
 		this.bottomHeight = this.ch - this.gh - this.topHeight;
 	}
 
+	get bottomComponentHeight() {
+		return this.bottomHeight;
+	}
+
 	get topComponentHeight() {
 		return this.topHeight;
 	}
@@ -26,13 +30,6 @@ class Pipe {
 	}
 	set xPos(x) {
 		this.x = x
-	}
-
-	get yPos() {
-		return this.y;
-	}
-	set yPos(y) {
-		this.y = y;
 	}
 
 	get speed() {
