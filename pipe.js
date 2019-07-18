@@ -13,6 +13,14 @@ class Pipe {
 		this.bottomHeight = this.ch - this.gh - this.topHeight;
 	}
 
+	get topComponentHeight() {
+		return this.topHeight;
+	}
+
+	get bottomComponentHeight() {
+		return this.bottomHeight;
+	}
+
 	get xPos() {
 		return this.x;
 	}

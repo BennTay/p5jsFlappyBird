@@ -1,5 +1,5 @@
 // Bird properties
-let birdX = 100,
+const birdX = 100,
     birdY = 250,
     fallSpeed = 0,
     birdDiameter = 30, 
@@ -7,17 +7,17 @@ let birdX = 100,
 var bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
 
 // Pipe properties
-let pipeWidth = 30,
+const pipeWidth = 30,
     pipeSpeed = 5,
     gapHeight = 120;
 var pipeList = [];
 
 // World properties
-var gravity = 0.6;
-var game_started = false;
-var canvas_width = 900;
-var canvas_height = 500;
-var score = 0;
+const gravity = 0.6,
+  canvas_width = 900,
+  canvas_height = 500;
+var score = 0,
+  game_started = false;
 
 function resetGame() {
   bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
@@ -53,8 +53,14 @@ function checkCollision() {
     endGame();
   }
 
-  //Check if the bird has collided with any pipes
-  
+  // Check if the bird has collided with any pipes
+  pipeList.forEach(p => {
+    if (Math.abs(p.xPos + (pipeWidth/2) - bird.xPos) < 0.5 * (pipeWidth + (0.5*birdDiameter))) {
+      if (bird.yPos < p.topComponentHeight || bird.yPos > canvas_height - p.bottomComponentHeight) {
+        endGame();
+      }
+    }
+  })
 }
 
 function updateGameObjects() {
@@ -74,6 +80,8 @@ function updateGameObjects() {
     }
     p.draw();
   })
+
+  //TODO: Keep score
 
   checkCollision();
 }
