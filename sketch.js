@@ -1,11 +1,12 @@
 // Bird properties
 const birdX = 100,
-    birdY = 250,
-    fallSpeed = 0,
-    birdDiameter = 30,
-    birdRadius = 0.5 * birdDiameter,
-    maxSpeed = -10;
-var bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
+      birdY = 250,
+      fallSpeed = 0,
+      birdDiameter = 30,
+      birdRadius = 0.5 * birdDiameter,
+      maxSpeed = -10;
+var birdImg,
+    bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
 
 // Pipe properties
 const pipeWidth = 30,
@@ -22,12 +23,8 @@ const gravity = 0.6,
 var score = 0,
   game_started = false;
 
-function resetGame() {
-  bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
-  pipeList = [];
-  game_started = false;
-  score = 0;
-  loop();
+function preload() {
+  birdImg = loadImage('images/bird.png');
 }
 
 function setup() {
@@ -39,15 +36,6 @@ function setup() {
   textSize(24);
 }
 
-// Draw FPS (rounded to 2 decimal places) at the bottom left of the screen
-// Source: https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance
-function displayFPS() {
-  let fps = frameRate();
-  fill(255);
-  stroke(0);
-  text("FPS: " + fps.toFixed(2), 10, height - 10);
-}
-
 function draw() {
   background(200); // Must come first. Draw the background before drawing the objects on it, otherwise objects will not appear.
   if (game_started) {
@@ -56,6 +44,23 @@ function draw() {
   } else {
     generateScreenSaver();
   }
+}
+
+function resetGame() {
+  bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
+  pipeList = [];
+  game_started = false;
+  score = 0;
+  loop();
+}
+
+// Draw FPS (rounded to 2 decimal places) at the bottom left of the screen
+// Source: https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance
+function displayFPS() {
+  let fps = frameRate();
+  fill(255);
+  stroke(0);
+  text("FPS: " + fps.toFixed(2), 10, height - 10);
 }
 
 function endGame() {
