@@ -5,7 +5,12 @@ class Pipe {
 		this.x = x; // x position
 		this.s = s; // speed
 		this.gh = gh; // gap height
-		this.gp = random() * ch; // gap position
+		this.gp = random(30, 350); // gap position
+
+		// Generate top and bottom components
+		this.topHeight = this.gp;
+		this.bottomYPos = this.gp + 120;
+		this.bottomHeight = this.ch - this.gh - this.topHeight;
 	}
 
 	get xPos() {
@@ -30,6 +35,10 @@ class Pipe {
 	}
 
 	draw() {
-		rect(this.x, 0, this.w, this.ch);
+		// Top component
+		rect(this.x, 0, this.w, this.topHeight);
+
+		// Bottom component
+		rect(this.x, this.bottomYPos, this.w, this.bottomHeight);
 	}
 }

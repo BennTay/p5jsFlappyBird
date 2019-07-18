@@ -48,9 +48,13 @@ function endGame() {
 }
 
 function checkCollision() {
+  // Check if bird has fallen to the ground or flown too high out of canvas
   if (bird.yPos >= height || bird.yPos <= -35) {
     endGame();
   }
+
+  //Check if the bird has collided with any pipes
+  
 }
 
 function updateGameObjects() {
