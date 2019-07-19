@@ -6,7 +6,8 @@ const birdX = 100,
       birdRadius = 0.5 * birdDiameter,
       maxSpeed = -10;
 var bird = new Bird(birdX, birdY, fallSpeed, birdDiameter),
-    birdImg;
+    birdImg1;
+    birdImg2;
 
 // Pipe properties
 const pipeWidth = 30,
@@ -24,8 +25,9 @@ var score = 0,
   game_started = false;
 
 function preload() {
-  birdImg = loadImage('images/bird4frame1.png');
-  bird.imgSprite = birdImg;
+  birdImg1 = loadImage('images/birdframe1.png');
+  birdImg2 = loadImage('images/birdframe2.png');
+  bird.imgSprite = birdImg1;
 }
 
 function setup() {
@@ -109,6 +111,11 @@ function checkCollision() {
 function updateGameObjects() {
   // Update Bird
   bird.fallSpeed += gravity;
+  if (bird.fallSpeed < 0) {
+    bird.imgSprite = birdImg1;
+  } else {
+    bird.imgSprite = birdImg2;
+  }
   bird.yPos += bird.fallSpeed;
   bird.draw();
 
