@@ -46,10 +46,6 @@ function setup() {
   var canvas = createCanvas(canvas_width, canvas_height);
   canvas.parent('flappybirdholder');
 
-  // Setup pipe static image
-  //Pipe.topPipeImg = topPipeImg;
-  //Pipe.bottomPipeImg = bottomPipeImg;
-
   // Setup text
   textSize(24);
 }
