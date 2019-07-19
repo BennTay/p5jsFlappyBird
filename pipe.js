@@ -1,5 +1,5 @@
 class Pipe {
-	constructor(w, ch, x, s, gh) {
+	constructor(w, ch, x, s, gh, topImg, bottomImg) {
 		this.w = w; // width
 		this.ch = ch; // canvas height
 		this.x = x; // x position
@@ -11,15 +11,19 @@ class Pipe {
 		this.topHeight = this.gp;
 		this.bottomYPos = this.gp + 120;
 		this.bottomHeight = this.ch - this.gh - this.topHeight;
-	}
 
+		// Images
+		this.topComponentImg = topImg;
+		this.bottomComponentImg = bottomImg;
+	}
+/*
 	set topPipeImg(img) {
 		Pipe.topComponentImg = img;
 	}
 	set bottomPipeImg(img) {
 		Pipe.bottomComponentImg = img;
 	}
-
+*/
 	get bottomComponentHeight() {
 		return this.bottomHeight;
 	}
@@ -49,10 +53,10 @@ class Pipe {
 	draw() {
 		// Top component
 		//rect(this.x, 0, this.w, this.topHeight);
-		image(Pipe.topComponentImg, this.x, 0, this.w, this.topHeight);
+		image(this.topComponentImg, this.x, 0, this.w, this.topHeight);
 
 		// Bottom component
 		//rect(this.x, this.bottomYPos, this.w, this.bottomHeight);
-		image(Pipe.bottomComponentImg, this.x, this.bottomYPos, this.w, this.bottomHeight);
+		image(this.bottomComponentImg, this.x, this.bottomYPos, this.w, this.bottomHeight);
 	}
 }

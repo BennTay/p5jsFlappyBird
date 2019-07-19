@@ -47,8 +47,8 @@ function setup() {
   canvas.parent('flappybirdholder');
 
   // Setup pipe static image
-  Pipe.topPipeImg = topPipeImg;
-  Pipe.bottomPipeImg = bottomPipeImg;
+  //Pipe.topPipeImg = topPipeImg;
+  //Pipe.bottomPipeImg = bottomPipeImg;
 
   // Setup text
   textSize(24);
@@ -138,7 +138,7 @@ function updateGameObjects() {
 
   // Update pipes
   if (frameCount % 80 === 0) {
-    pipeList.push(new Pipe(pipeWidth, canvas_height, canvas_width, pipeSpeed, gapHeight));
+    pipeList.push(new Pipe(pipeWidth, canvas_height, canvas_width, pipeSpeed, gapHeight, topPipeImg, bottomPipeImg));
   }
   pipeList.forEach(p => {
     p.xPos -= p.speed;
