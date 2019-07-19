@@ -19,6 +19,7 @@ var pipeList = [];
 const gravity = 0.6,
   canvas_width = 900,
   canvas_height = 500;
+var backgroundImg;
 
 // Other game properties
 var score = 0,
@@ -28,6 +29,8 @@ function preload() {
   birdImg1 = loadImage('images/birdframe1.png');
   birdImg2 = loadImage('images/birdframe2.png');
   bird.imgSprite = birdImg1;
+
+  backgroundImg = loadImage('images/bg.png');
 }
 
 function setup() {
@@ -40,7 +43,7 @@ function setup() {
 }
 
 function draw() {
-  background(200); // Must come first. Draw the background before drawing the objects on it, otherwise objects will not appear.
+  background(backgroundImg); // Must come first. Draw the background before drawing the objects on it, otherwise objects will not appear.
   if (game_started) {
     updateGameObjects();
     text('Score: ' + str(score), 700, 50);
