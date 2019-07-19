@@ -79,6 +79,7 @@ function displayFPS() {
 }
 
 function endGame() {
+  //TODO: Use canvas text instead of alert
   alert('Game over!');
   noLoop();
 }
