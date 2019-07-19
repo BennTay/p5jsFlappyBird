@@ -13,6 +13,13 @@ class Pipe {
 		this.bottomHeight = this.ch - this.gh - this.topHeight;
 	}
 
+	set topPipeImg(img) {
+		Pipe.topComponentImg = img;
+	}
+	set bottomPipeImg(img) {
+		Pipe.bottomComponentImg = img;
+	}
+
 	get bottomComponentHeight() {
 		return this.bottomHeight;
 	}
@@ -41,9 +48,11 @@ class Pipe {
 
 	draw() {
 		// Top component
-		rect(this.x, 0, this.w, this.topHeight);
+		//rect(this.x, 0, this.w, this.topHeight);
+		image(Pipe.topComponentImg, this.x, 0, this.w, this.topHeight);
 
 		// Bottom component
-		rect(this.x, this.bottomYPos, this.w, this.bottomHeight);
+		//rect(this.x, this.bottomYPos, this.w, this.bottomHeight);
+		image(Pipe.bottomComponentImg, this.x, this.bottomYPos, this.w, this.bottomHeight);
 	}
 }

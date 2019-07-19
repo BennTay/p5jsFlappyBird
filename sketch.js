@@ -13,7 +13,9 @@ var bird = new Bird(birdX, birdY, fallSpeed, birdDiameter),
 const pipeWidth = 30,
     pipeSpeed = 5,
     gapHeight = 120;
-var pipeList = [];
+var pipeList = [],
+    topPipeImg,
+    bottomPipeImg;
 
 // World properties
 const gravity = 0.6,
@@ -26,10 +28,16 @@ var score = 0,
   game_started = false;
 
 function preload() {
+  // Bird images
   birdImg1 = loadImage('images/birdframe1.png');
   birdImg2 = loadImage('images/birdframe2.png');
   bird.imgSprite = birdImg1;
 
+  // Pipe images
+  topPipeImg = loadImage('images/toppipe.png');
+  bottomPipeImg = loadImage('images/bottompipe.png');
+
+  // Background image
   backgroundImg = loadImage('images/bg.png');
 }
 
@@ -37,6 +45,10 @@ function setup() {
   // Setup canvas
   var canvas = createCanvas(canvas_width, canvas_height);
   canvas.parent('flappybirdholder');
+
+  // Setup pipe static image
+  Pipe.topPipeImg = topPipeImg;
+  Pipe.bottomPipeImg = bottomPipeImg;
 
   // Setup text
   textSize(24);
