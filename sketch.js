@@ -24,7 +24,7 @@ var score = 0,
   game_started = false;
 
 function preload() {
-  birdImg = loadImage('images/bird1.png');
+  birdImg = loadImage('images/bird4frame1.png');
   bird.imgSprite = birdImg;
 }
 
