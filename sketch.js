@@ -6,7 +6,7 @@ const birdX = 100,
       birdRadius = 0.5 * birdDiameter,
       maxSpeed = -10;
 var bird = new Bird(birdX, birdY, fallSpeed, birdDiameter),
-    birdImg1;
+    birdImg1,
     birdImg2;
 
 // Pipe properties
@@ -111,11 +111,13 @@ function checkCollision() {
 function updateGameObjects() {
   // Update Bird
   bird.fallSpeed += gravity;
+  
   if (bird.fallSpeed < 0) {
     bird.imgSprite = birdImg1;
   } else {
     bird.imgSprite = birdImg2;
   }
+  
   bird.yPos += bird.fallSpeed;
   bird.draw();
 
