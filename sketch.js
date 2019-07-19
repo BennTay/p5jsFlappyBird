@@ -113,9 +113,9 @@ function updateGameObjects() {
   bird.fallSpeed += gravity;
   
   if (bird.fallSpeed < 0) {
-    bird.imgSprite = birdImg1;
-  } else {
     bird.imgSprite = birdImg2;
+  } else {
+    bird.imgSprite = birdImg1;
   }
   
   bird.yPos += bird.fallSpeed;
