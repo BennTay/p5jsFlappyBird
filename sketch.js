@@ -22,6 +22,10 @@ const gravity = 0.6,
 var score = 0,
   game_started = false;
 
+function preload() {
+  let birdImg = loadImage('images/bird.png');
+  bird.imgSprite = birdImg;
+}
 
 function setup() {
   // Setup canvas
