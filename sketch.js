@@ -51,7 +51,7 @@ function draw() {
 
 function resetGame() {
   bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
-  bird.imgSprite = birdImg;
+  bird.imgSprite = birdImg1;
   pipeList = [];
   game_started = false;
   score = 0;
