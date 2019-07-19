@@ -33,7 +33,7 @@ function setup() {
   canvas.parent('flappybirdholder');
 
   // Setup text
-  textSize(24);
+  textSize(12);
 }
 
 function draw() {
