@@ -1,3 +1,10 @@
+/**
+ * Author: Benn Tay Guobin
+ * 
+ * Improvements:
+ *   - Make the bird talk as he passes each pipe.
+ */
+
 // Bird properties
 const birdX = 100,
       birdY = 250,
