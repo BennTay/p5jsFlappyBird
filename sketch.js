@@ -5,7 +5,8 @@ const birdX = 100,
       birdDiameter = 30,
       birdRadius = 0.5 * birdDiameter,
       maxSpeed = -10;
-var bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
+var bird = new Bird(birdX, birdY, fallSpeed, birdDiameter),
+    birdImg;
 
 // Pipe properties
 const pipeWidth = 30,
@@ -23,7 +24,7 @@ var score = 0,
   game_started = false;
 
 function preload() {
-  let birdImg = loadImage('images/bird.png');
+  birdImg = loadImage('images/bird.png');
   bird.imgSprite = birdImg;
 }
 
@@ -48,6 +49,7 @@ function draw() {
 
 function resetGame() {
   bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
+  bird.imgSprite = birdImg;
   pipeList = [];
   game_started = false;
   score = 0;

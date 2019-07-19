@@ -35,6 +35,5 @@ class Bird {
 	draw() {
 		//ellipse(this.x, this.y, this.d, this.d);
 		image(this.img, this.x, this.y, this.d, this.d);
-		console.log('DRAWING IMAGE');
 	}
 }
