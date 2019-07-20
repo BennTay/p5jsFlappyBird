@@ -3,6 +3,10 @@
  * 
  * Improvements:
  *   - Make the bird talk as he passes each pipe.
+ *   - Add music/sound effects
+ *
+ * Bugs:
+ *   - On mobile, page zooms when flap button is tapped too quickly.
  */
 
 // Bird properties
@@ -58,7 +62,8 @@ function setup() {
   textSize(24);
 
   // Setup buttons
-  flapButton = new Clickable(750, 400);
+  flapButton = new Clickable();
+  flapButton.locate(750, 400);
   flapButton.text = 'Flap';
   flapButton.onRelease = function() {
     game_started = true;
