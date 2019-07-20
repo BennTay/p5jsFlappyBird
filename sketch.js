@@ -3,8 +3,9 @@
  * 
  * Improvements:
  *   - Make the bird talk as he passes each pipe.
- *   - Add music/sound effects
- *   - Finetune collision. Use circle for bird shape
+ *   - Add music/sound effects.
+ *   - Finetune collision.
+ *   - Add dying animation (explode, fall to the ground, etc)
  */
 
 // Bird properties
