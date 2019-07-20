@@ -4,9 +4,6 @@
  * Improvements:
  *   - Make the bird talk as he passes each pipe.
  *   - Add music/sound effects
- *
- * Bugs:
- *   - On mobile, page zooms when flap button is tapped too quickly.
  */
 
 // Bird properties
