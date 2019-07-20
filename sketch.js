@@ -76,13 +76,14 @@ function setup() {
 
 function draw() {
   background(backgroundImg); // Must come first. Draw the background before drawing the objects on it, otherwise objects will not appear.
-  flapButton.draw();
   if (game_started) {
     updateGameObjects();
     text('Score: ' + str(score), 700, 50);
   } else {
     generateScreenSaver();
   }
+  flapButton.draw();
+
 }
 
 function resetGame() {
