@@ -32,7 +32,8 @@ var backgroundImg;
 
 // Other game properties
 var score = 0,
-  game_started = false;
+  game_started = false,
+  flapButton;
 
 function preload() {
   // Bird images
@@ -55,10 +56,22 @@ function setup() {
 
   // Setup text
   textSize(24);
+
+  // Setup buttons
+  flapButton = new Clickable(750, 400);
+  flapButton.text = 'Flap';
+  flapButton.onRelease = function() {
+    game_started = true;
+    bird.fallSpeed -= 16;
+    if (bird.fallSpeed < maxSpeed) {
+      bird.fallSpeed = maxSpeed;
+    }
+  }
 }
 
 function draw() {
   background(backgroundImg); // Must come first. Draw the background before drawing the objects on it, otherwise objects will not appear.
+  flapButton.draw();
   if (game_started) {
     updateGameObjects();
     text('Score: ' + str(score), 700, 50);
