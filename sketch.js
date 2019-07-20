@@ -143,8 +143,12 @@ function checkCollision() {
   // Check collision between bird and nearest pipe using p5.collide2D
   if (pipeList.length > 0) {
     let p = pipeList[0];
-    if (collideRectRect(p.xPos, 0, pipeWidth, p.topComponentHeight, bird.xPos, bird.yPos, birdDiameter, birdDiameter)
+    /*if (collideRectRect(p.xPos, 0, pipeWidth, p.topComponentHeight, bird.xPos, bird.yPos, birdDiameter, birdDiameter)
       || collideRectRect(p.xPos, p.bottomComponentYPos, pipeWidth, p.bottomComponentHeight, bird.xPos, bird.yPos, birdDiameter, birdDiameter)) {
+      endGame();
+    }*/
+    if (collideRectCircle(p.xPos, 0, pipeWidth, p.topComponentHeight, bird.xPos, bird.yPos, birdDiameter)
+      || collideRectCircle(p.xPos, p.bottomComponentYPos, pipeWidth, p.bottomComponentHeight, bird.xPos, bird.yPos, birdDiameter)) {
       endGame();
     }
   }
