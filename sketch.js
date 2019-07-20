@@ -4,6 +4,7 @@
  * Improvements:
  *   - Make the bird talk as he passes each pipe.
  *   - Add music/sound effects
+ *   - Finetune collision. Use circle for bird shape
  */
 
 // Bird properties
@@ -62,12 +63,18 @@ function setup() {
   flapButton = new Clickable();
   flapButton.locate(750, 400);
   flapButton.text = 'Flap';
-  flapButton.onRelease = function() {
-    game_started = true;
+
+  flapButton.onPress = function() {
+    this.color = "#AAAAFF"
     bird.fallSpeed -= 16;
     if (bird.fallSpeed < maxSpeed) {
       bird.fallSpeed = maxSpeed;
     }
+  }
+
+  flapButton.onRelease = function() {
+    game_started = true;
+    this.color = "#000000";
   }
 }
 
