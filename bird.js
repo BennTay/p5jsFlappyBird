@@ -33,7 +33,6 @@ class Bird {
 	}
 
 	draw() {
-		//ellipse(this.x, this.y, this.d, this.d);
-		image(this.img, this.x, this.y, this.d, this.d);
+		image(this.img, this.x, this.y, this.d + 5, this.d + 5);
 	}
 }
