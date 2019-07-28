@@ -66,6 +66,7 @@ function setup() {
   flapButton.locate(700, 300);
   flapButton.text = 'Flap';
   flapButton.resize(150, 150);
+  flappButton.style.backgroundColor = 'transparent';
 
   flapButton.onPress = function() {
     this.color = "#FFFF00"
