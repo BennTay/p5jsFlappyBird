@@ -37,7 +37,8 @@ var backgroundImg;
 // Other game properties
 var score = 0,
   game_started = false,
-  flapButton;
+  flapButton,
+  resetButton;
 
 function preload() {
   // Bird images
@@ -192,8 +193,8 @@ function updateGameObjects() {
 }
 
 function generateScreenSaver() {
-  // TODO: Add moving background
   bird.draw();
+  text('Press F or click/tap the Flap button to fly!');
 }
 
 function keyPressed() {
