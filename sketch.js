@@ -66,9 +66,10 @@ function setup() {
   flapButton.locate(700, 300);
   flapButton.text = 'Flap';
   flapButton.resize(150, 150);
+  flapButton.color = 'rgba(0, 0, 0, 0.0)';
 
   flapButton.onPress = function() {
-    this.color = "#FFFF00"
+    this.color = 'rgba(255, 255, 0, 0.5)';
     bird.fallSpeed -= 16;
     if (bird.fallSpeed < maxSpeed) {
       bird.fallSpeed = maxSpeed;
@@ -77,7 +78,7 @@ function setup() {
 
   flapButton.onRelease = function() {
     game_started = true;
-    this.color = 'rgba(0, 0, 0, 0.0)';//"#FFFFFF";
+    this.color = 'rgba(0, 0, 0, 0.0)';
   }
 }
 
