@@ -40,7 +40,7 @@ var score = 0,
   flapButton,
   resetButton;
 const startText = 'Press F or click/tap the Flap button to fly!',
-      endText = 'Game over! Your score is ' + str(score) + '!';
+      endText = 'Game over!';
 
 function preload() {
   // Bird images
