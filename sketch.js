@@ -130,7 +130,7 @@ function endGame() {
   //alert('Game over!');
   showInstructions(endText);
   flapButton.text = 'Play again';
-  flapButton.onPress = resetGame();
+  flapButton.onPress = resetGame;
   //noLoop();
 }
 
