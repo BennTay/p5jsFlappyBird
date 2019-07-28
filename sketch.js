@@ -100,6 +100,7 @@ function resetGame() {
   pipeList = [];
   game_started = false;
   score = 0;
+  flapButton.color = 'rgba(0, 0, 0, 0.0)';
   loop();
 }
 
