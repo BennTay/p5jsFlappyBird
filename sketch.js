@@ -194,6 +194,7 @@ function updateGameObjects() {
 
 function generateScreenSaver() {
   bird.draw();
+  fill(255);
   text('Press F or click/tap the Flap button to fly!');
 }
 
