@@ -131,8 +131,7 @@ function endGame() {
   showInstructions(endText);
   flapButton.text = 'Play again';
   flapButton.onPress = resetGame();
-  noLoop();
-  draw();
+  //noLoop();
 }
 
 function checkCollision() {
