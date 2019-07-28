@@ -6,6 +6,7 @@
  *   - Add music/sound effects.
  *   - Finetune collision.
  *   - Add dying animation (explode, fall to the ground, etc).
+ *     idea: Change background to heaven, add halo to bird.
  *   - Confine all text to within the game canvas.
  */
 
@@ -71,14 +72,14 @@ function setup() {
   flapButton.resize(150, 150);
   flapButton.color = 'rgba(0, 0, 0, 0.0)';
 
-  flapButton.onPress = function() {
+  flapButton.onPress = startGameButtonFunction; /*function() {
     game_started = true;
     this.color = 'rgba(255, 255, 0, 0.5)';
     bird.fallSpeed -= 16;
     if (bird.fallSpeed < maxSpeed) {
       bird.fallSpeed = maxSpeed;
     }
-  }
+  }*/
 
   flapButton.onRelease = function() {
     this.color = 'rgba(0, 0, 0, 0.0)';
@@ -101,38 +102,33 @@ function resetGame() {
   bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
   bird.imgSprite = birdImg1;
   pipeList = [];
-  //game_started = false;
   score = 0;
   flapButton.color = 'rgba(0, 0, 0, 0.0)';
   flapButton.text = 'Flap';
-  flapButton.onPress = function() {
+  flapButton.onPress = startGameButtonFunction; /*function() {
     game_started = true;
     this.color = 'rgba(255, 255, 0, 0.5)';
     bird.fallSpeed -= 16;
     if (bird.fallSpeed < maxSpeed) {
       bird.fallSpeed = maxSpeed;
     }
-  }
-  //loop();
-}
-
-// Draw FPS (rounded to 2 decimal places) at the bottom left of the screen
-// Source: https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance
-function displayFPS() {
-  let fps = frameRate();
-  fill(255);
-  stroke(0);
-  text("FPS: " + fps.toFixed(2), 10, height - 10);
+  }*/
 }
 
 function endGame() {
-  //TODO: Use canvas text instead of alert
-  //alert('Game over!');
   showInstructions(endText);
   flapButton.text = 'Play again';
   flapButton.onPress = resetGame;
   game_started = false;
-  //noLoop();
+}
+
+function startGameButtonFunction() {
+  game_started = true;
+  this.color = 'rgba(255, 255, 0, 0.5)';
+  bird.fallSpeed -= 16;
+  if (bird.fallSpeed < maxSpeed) {
+    bird.fallSpeed = maxSpeed;
+  }
 }
 
 function checkCollision() {
@@ -228,4 +224,13 @@ function showScore() {
 
 function showInstructions(instructionText) {
   text(instructionText, 450, 250);
+}
+
+// Draw FPS (rounded to 2 decimal places) at the bottom left of the screen
+// Source: https://github.com/processing/p5.js/wiki/Optimizing-p5.js-Code-for-Performance
+function displayFPS() {
+  let fps = frameRate();
+  fill(255);
+  stroke(0);
+  text("FPS: " + fps.toFixed(2), 10, height - 10);
 }
