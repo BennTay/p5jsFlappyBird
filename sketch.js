@@ -77,7 +77,7 @@ function setup() {
 
   flapButton.onRelease = function() {
     game_started = true;
-    this.color = "#FFFFFF";
+    this.color = 'rgba(0, 0, 0, 0.0)';//"#FFFFFF";
   }
 }
 
