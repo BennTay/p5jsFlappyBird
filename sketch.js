@@ -72,7 +72,7 @@ function setup() {
   // Setup text
   textSize(24);
 
-  // Setup buttons
+  // Setup button
   flapButton = new Clickable();
   flapButton.locate(700, 300);
   flapButton.text = 'Flap';
@@ -94,69 +94,6 @@ function draw() {
     generateScreenSaver();
   }
   flapButton.draw();
-
-}
-
-function resetGame() {
-  bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
-  bird.imgSprite = birdImg1;
-  pipeList = [];
-  score = 0;
-  flapButton.color = releaseButtonColor;
-  flapButton.text = startGameButtonText;
-  flapButton.onPress = startGameButtonFunction;
-}
-
-function endGame() {
-  showInstructions(endText);
-  flapButton.text = endGameButtonText;
-  flapButton.onPress = resetGame;
-  game_started = false;
-}
-
-function startGameButtonFunction() {
-  game_started = true;
-  this.color = tapButtonColor;
-  bird.fallSpeed -= 16;
-  if (bird.fallSpeed < maxSpeed) {
-    bird.fallSpeed = maxSpeed;
-  }
-}
-
-function checkCollision() {
-  // Check collision between bird and ground/sky using p5.collide2D
-  if (collideLineRect(0, canvas_height, canvas_width, canvas_height, bird.xPos, bird.yPos, birdDiameter, birdDiameter)
-    || collideLineRect(0, -35, canvas_width, -35, bird.xPos, bird.yPos, birdDiameter, birdDiameter)) {
-    endGame();
-  }
-
-  // Check collision between bird and nearest pipe using p5.collide2D
-  if (pipeList.length > 0) {
-    let p = pipeList[0];
-    if (collideRectRect(p.xPos, 0, pipeWidth, p.topComponentHeight, bird.xPos, bird.yPos, birdDiameter, birdDiameter)
-      || collideRectRect(p.xPos, p.bottomComponentYPos, pipeWidth, p.bottomComponentHeight, bird.xPos, bird.yPos, birdDiameter, birdDiameter)) {
-      endGame();
-    }
-  }
-
-  // Check if bird has fallen to the ground or flown too high out of canvas
-  /*
-  if (bird.yPos + birdRadius >= height || bird.yPos <= -35) {
-    endGame();
-  }
-  */
-
-  // Check if the bird has collided with the nearest pipe
-  /*
-  if (pipeList.length > 0) {
-    let p = pipeList[0];
-    if (Math.abs(p.xPos + (pipeWidth/2) - bird.xPos) < 0.5 * (pipeWidth + (birdRadius))) {
-      if (bird.yPos - birdRadius <= p.topComponentHeight || bird.yPos + birdRadius > p.bottomComponentYPos) {
-        endGame();
-      }
-    }
-  }
-  */
 }
 
 function updateGameObjects() {
@@ -198,6 +135,68 @@ function updateGameObjects() {
 function generateScreenSaver() {
   bird.draw();
   showInstructions(startText);
+}
+
+function checkCollision() {
+  // Check collision between bird and ground/sky using p5.collide2D
+  if (collideLineRect(0, canvas_height, canvas_width, canvas_height, bird.xPos, bird.yPos, birdDiameter, birdDiameter)
+    || collideLineRect(0, -35, canvas_width, -35, bird.xPos, bird.yPos, birdDiameter, birdDiameter)) {
+    endGame();
+  }
+
+  // Check collision between bird and nearest pipe using p5.collide2D
+  if (pipeList.length > 0) {
+    let p = pipeList[0];
+    if (collideRectRect(p.xPos, 0, pipeWidth, p.topComponentHeight, bird.xPos, bird.yPos, birdDiameter, birdDiameter)
+      || collideRectRect(p.xPos, p.bottomComponentYPos, pipeWidth, p.bottomComponentHeight, bird.xPos, bird.yPos, birdDiameter, birdDiameter)) {
+      endGame();
+    }
+  }
+
+  // Check if bird has fallen to the ground or flown too high out of canvas
+  /*
+  if (bird.yPos + birdRadius >= height || bird.yPos <= -35) {
+    endGame();
+  }
+  */
+
+  // Check if the bird has collided with the nearest pipe
+  /*
+  if (pipeList.length > 0) {
+    let p = pipeList[0];
+    if (Math.abs(p.xPos + (pipeWidth/2) - bird.xPos) < 0.5 * (pipeWidth + (birdRadius))) {
+      if (bird.yPos - birdRadius <= p.topComponentHeight || bird.yPos + birdRadius > p.bottomComponentYPos) {
+        endGame();
+      }
+    }
+  }
+  */
+}
+
+function endGame() {
+  showInstructions(endText);
+  flapButton.text = endGameButtonText;
+  flapButton.onPress = resetGame;
+  game_started = false;
+}
+
+function resetGame() {
+  bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
+  bird.imgSprite = birdImg1;
+  pipeList = [];
+  score = 0;
+  flapButton.color = releaseButtonColor;
+  flapButton.text = startGameButtonText;
+  flapButton.onPress = startGameButtonFunction;
+}
+
+function startGameButtonFunction() {
+  game_started = true;
+  this.color = tapButtonColor;
+  bird.fallSpeed -= 16;
+  if (bird.fallSpeed < maxSpeed) {
+    bird.fallSpeed = maxSpeed;
+  }
 }
 
 function keyPressed() {
