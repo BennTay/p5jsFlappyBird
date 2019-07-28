@@ -105,6 +105,7 @@ function resetGame() {
   game_started = false;
   score = 0;
   flapButton.color = 'rgba(0, 0, 0, 0.0)';
+  flapButton.text = 'Flap';
   flapButton.onPress = function() {
     this.color = 'rgba(255, 255, 0, 0.5)';
     bird.fallSpeed -= 16;
@@ -129,9 +130,7 @@ function endGame() {
   //alert('Game over!');
   showInstructions(endText);
   flapButton.text = 'Play again';
-  flapButton.onPress = function() {
-    resetGame();
-  }
+  flapButton.onPress = resetGame();
   noLoop();
 }
 
