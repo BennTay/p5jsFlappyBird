@@ -8,6 +8,9 @@
  *   - Add dying animation (explode, fall to the ground, etc).
  *     idea: Change background to heaven, add halo to bird.
  *   - Confine all text to within the game canvas.
+ *
+ * Bugs:
+ *   - Pressing F allows game to continue even when game is over.
  */
 
 // Bird properties
@@ -41,7 +44,11 @@ var score = 0,
   flapButton,
   resetButton;
 const startText = 'Press F or click/tap the Flap button to fly!',
-      endText = 'Game over!';
+      endText = 'Game over!',
+      startGameButtonText = 'Flap',
+      endGameButtonText = 'Play again',
+      tapButtonColor = 'rgba(255, 255, 0, 0.5)',
+      releaseButtonColor = 'rgba(0, 0, 0, 0.0)';
 
 function preload() {
   // Bird images
@@ -70,24 +77,16 @@ function setup() {
   flapButton.locate(700, 300);
   flapButton.text = 'Flap';
   flapButton.resize(150, 150);
-  flapButton.color = 'rgba(0, 0, 0, 0.0)';
-
-  flapButton.onPress = startGameButtonFunction; /*function() {
-    game_started = true;
-    this.color = 'rgba(255, 255, 0, 0.5)';
-    bird.fallSpeed -= 16;
-    if (bird.fallSpeed < maxSpeed) {
-      bird.fallSpeed = maxSpeed;
-    }
-  }*/
-
+  flapButton.color = releaseButtonColor;
+  flapButton.onPress = startGameButtonFunction;
   flapButton.onRelease = function() {
-    this.color = 'rgba(0, 0, 0, 0.0)';
+    this.color = releaseButtonColor;
   }
 }
 
 function draw() {
-  background(backgroundImg); // Must come first. Draw the background before drawing the objects on it, otherwise objects will not appear.
+  // Must come first. Draw the background before drawing the objects on it, otherwise objects will not appear.
+  background(backgroundImg);
   if (game_started) {
     updateGameObjects();
     showScore();
@@ -103,28 +102,21 @@ function resetGame() {
   bird.imgSprite = birdImg1;
   pipeList = [];
   score = 0;
-  flapButton.color = 'rgba(0, 0, 0, 0.0)';
-  flapButton.text = 'Flap';
-  flapButton.onPress = startGameButtonFunction; /*function() {
-    game_started = true;
-    this.color = 'rgba(255, 255, 0, 0.5)';
-    bird.fallSpeed -= 16;
-    if (bird.fallSpeed < maxSpeed) {
-      bird.fallSpeed = maxSpeed;
-    }
-  }*/
+  flapButton.color = releaseButtonColor;
+  flapButton.text = startGameButtonText;
+  flapButton.onPress = startGameButtonFunction;
 }
 
 function endGame() {
   showInstructions(endText);
-  flapButton.text = 'Play again';
+  flapButton.text = endGameButtonText;
   flapButton.onPress = resetGame;
   game_started = false;
 }
 
 function startGameButtonFunction() {
   game_started = true;
-  this.color = 'rgba(255, 255, 0, 0.5)';
+  this.color = tapButtonColor;
   bird.fallSpeed -= 16;
   if (bird.fallSpeed < maxSpeed) {
     bird.fallSpeed = maxSpeed;
@@ -132,18 +124,27 @@ function startGameButtonFunction() {
 }
 
 function checkCollision() {
+  // Check collision between bird and ground/sky using p5.collide2D
+  if (collideLineRect(0, canvas_height, canvas_width, canvas_height, bird.xPos, bird.yPos, birdDiameter, birdDiameter)
+    || collideLineRect(0, -35, canvas_width, -35, bird.xPos, bird.yPos, birdDiameter, birdDiameter)) {
+    endGame();
+  }
+
+  // Check collision between bird and nearest pipe using p5.collide2D
+  if (pipeList.length > 0) {
+    let p = pipeList[0];
+    if (collideRectRect(p.xPos, 0, pipeWidth, p.topComponentHeight, bird.xPos, bird.yPos, birdDiameter, birdDiameter)
+      || collideRectRect(p.xPos, p.bottomComponentYPos, pipeWidth, p.bottomComponentHeight, bird.xPos, bird.yPos, birdDiameter, birdDiameter)) {
+      endGame();
+    }
+  }
+
   // Check if bird has fallen to the ground or flown too high out of canvas
   /*
   if (bird.yPos + birdRadius >= height || bird.yPos <= -35) {
     endGame();
   }
   */
-
-  // Check collision between bird and ground/sky using p5.collide2D
-  if (collideLineRect(0, canvas_height, canvas_width, canvas_height, bird.xPos, bird.yPos, birdDiameter, birdDiameter)
-    || collideLineRect(0, -35, canvas_width, -35, bird.xPos, bird.yPos, birdDiameter, birdDiameter)) {
-    endGame();
-  }
 
   // Check if the bird has collided with the nearest pipe
   /*
@@ -156,15 +157,6 @@ function checkCollision() {
     }
   }
   */
-
-  // Check collision between bird and nearest pipe using p5.collide2D
-  if (pipeList.length > 0) {
-    let p = pipeList[0];
-    if (collideRectRect(p.xPos, 0, pipeWidth, p.topComponentHeight, bird.xPos, bird.yPos, birdDiameter, birdDiameter)
-      || collideRectRect(p.xPos, p.bottomComponentYPos, pipeWidth, p.bottomComponentHeight, bird.xPos, bird.yPos, birdDiameter, birdDiameter)) {
-      endGame();
-    }
-  }
 }
 
 function updateGameObjects() {
