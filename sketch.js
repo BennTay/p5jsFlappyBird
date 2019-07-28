@@ -39,6 +39,8 @@ var score = 0,
   game_started = false,
   flapButton,
   resetButton;
+const startText = 'Press F or click/tap the Flap button to fly!',
+      endText = 'Game over! Your score is ' + str(score) + '!';
 
 function preload() {
   // Bird images
@@ -117,7 +119,8 @@ function displayFPS() {
 
 function endGame() {
   //TODO: Use canvas text instead of alert
-  alert('Game over!');
+  //alert('Game over!');
+  showInstructions(endText);
   noLoop();
 }
 
@@ -195,7 +198,7 @@ function updateGameObjects() {
 
 function generateScreenSaver() {
   bird.draw();
-  showInstructions();
+  showInstructions(startText);
 }
 
 function keyPressed() {
@@ -212,6 +215,6 @@ function showScore() {
   text('Score: ' + str(score), 700, 50);
 }
 
-function showInstructions() {
-  text('Press F or click/tap the Flap button to fly!', 450, 250);
+function showInstructions(instructionText) {
+  text(instructionText, 450, 250);
 }
