@@ -87,7 +87,8 @@ function draw() {
   background(backgroundImg); // Must come first. Draw the background before drawing the objects on it, otherwise objects will not appear.
   if (game_started) {
     updateGameObjects();
-    text('Score: ' + str(score), 700, 50);
+    //text('Score: ' + str(score), 700, 50);
+    showScore();
   } else {
     generateScreenSaver();
   }
@@ -194,7 +195,7 @@ function updateGameObjects() {
 
 function generateScreenSaver() {
   bird.draw();
-  text('Press F or click/tap the Flap button to fly!', 450, 250);
+  showInstructions();
 }
 
 function keyPressed() {
@@ -205,4 +206,12 @@ function keyPressed() {
       bird.fallSpeed = maxSpeed;
     }
   }
+}
+
+function showScore() {
+  text('Score: ' + str(score), 700, 50);
+}
+
+function showInstructions() {
+  text('Press F or click/tap the Flap button to fly!', 450, 250);
 }
