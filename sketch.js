@@ -72,6 +72,7 @@ function setup() {
   flapButton.color = 'rgba(0, 0, 0, 0.0)';
 
   flapButton.onPress = function() {
+    game_started = true;
     this.color = 'rgba(255, 255, 0, 0.5)';
     bird.fallSpeed -= 16;
     if (bird.fallSpeed < maxSpeed) {
@@ -80,7 +81,6 @@ function setup() {
   }
 
   flapButton.onRelease = function() {
-    game_started = true;
     this.color = 'rgba(0, 0, 0, 0.0)';
   }
 }
@@ -89,7 +89,6 @@ function draw() {
   background(backgroundImg); // Must come first. Draw the background before drawing the objects on it, otherwise objects will not appear.
   if (game_started) {
     updateGameObjects();
-    //text('Score: ' + str(score), 700, 50);
     showScore();
   } else {
     generateScreenSaver();
@@ -102,11 +101,12 @@ function resetGame() {
   bird = new Bird(birdX, birdY, fallSpeed, birdDiameter);
   bird.imgSprite = birdImg1;
   pipeList = [];
-  game_started = false;
+  //game_started = false;
   score = 0;
   flapButton.color = 'rgba(0, 0, 0, 0.0)';
   flapButton.text = 'Flap';
   flapButton.onPress = function() {
+    game_started = true;
     this.color = 'rgba(255, 255, 0, 0.5)';
     bird.fallSpeed -= 16;
     if (bird.fallSpeed < maxSpeed) {
