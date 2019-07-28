@@ -113,7 +113,7 @@ function resetGame() {
       bird.fallSpeed = maxSpeed;
     }
   }
-  loop();
+  //loop();
 }
 
 // Draw FPS (rounded to 2 decimal places) at the bottom left of the screen
@@ -131,6 +131,7 @@ function endGame() {
   showInstructions(endText);
   flapButton.text = 'Play again';
   flapButton.onPress = resetGame;
+  //game_started = false;
   //noLoop();
 }
 
