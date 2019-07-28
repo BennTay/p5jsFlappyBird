@@ -5,7 +5,8 @@
  *   - Make the bird talk as he passes each pipe.
  *   - Add music/sound effects.
  *   - Finetune collision.
- *   - Add dying animation (explode, fall to the ground, etc)
+ *   - Add dying animation (explode, fall to the ground, etc).
+ *   - Confine all text to within the game canvas.
  */
 
 // Bird properties
@@ -62,8 +63,9 @@ function setup() {
 
   // Setup buttons
   flapButton = new Clickable();
-  flapButton.locate(750, 400);
+  flapButton.locate(700, 300);
   flapButton.text = 'Flap';
+  flapButton.resize(150, 150);
 
   flapButton.onPress = function() {
     this.color = "#FFFF00"
