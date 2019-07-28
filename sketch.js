@@ -105,6 +105,13 @@ function resetGame() {
   game_started = false;
   score = 0;
   flapButton.color = 'rgba(0, 0, 0, 0.0)';
+  flapButton.onPress = function() {
+    this.color = 'rgba(255, 255, 0, 0.5)';
+    bird.fallSpeed -= 16;
+    if (bird.fallSpeed < maxSpeed) {
+      bird.fallSpeed = maxSpeed;
+    }
+  }
   loop();
 }
 
@@ -121,6 +128,10 @@ function endGame() {
   //TODO: Use canvas text instead of alert
   //alert('Game over!');
   showInstructions(endText);
+  flapButton.text = 'Play again';
+  flapButton.onPress = function() {
+    resetGame();
+  }
   noLoop();
 }
 
