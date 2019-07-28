@@ -131,7 +131,7 @@ function endGame() {
   showInstructions(endText);
   flapButton.text = 'Play again';
   flapButton.onPress = resetGame;
-  //game_started = false;
+  game_started = false;
   //noLoop();
 }
 
